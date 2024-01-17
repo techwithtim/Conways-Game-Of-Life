@@ -1,3 +1,5 @@
+# Conway's Game of Life Source Code
+
 import pygame
 import random
 
