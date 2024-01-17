@@ -7,7 +7,9 @@ BLACK = (0, 0, 0)
 GREY = (128, 128, 128)
 YELLOW = (255, 255, 0)
 
-WIDTH, HEIGHT = 800, 800
+# Use dynamic grid size based on the screen size
+info = pygame.display.Info()
+WIDTH, HEIGHT = info.current_w, info.current_h
 TILE_SIZE = 20
 GRID_WIDTH = WIDTH // TILE_SIZE
 GRID_HEIGHT = HEIGHT // TILE_SIZE
@@ -15,11 +17,19 @@ FPS = 60
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 
-
 clock = pygame.time.Clock()
 
+
 def gen(num):
-    return set([(random.randrange(0, GRID_HEIGHT), random.randrange(0, GRID_WIDTH)) for _ in range(num)])
+    all_positions = [(row, col) for row in range(GRID_HEIGHT) for col in range(GRID_WIDTH)]
+    random_positions = set()
+
+    while len(random_positions) < min(num, GRID_WIDTH * GRID_HEIGHT):
+        random_positions.add(random.choice(all_positions))
+
+    return random_positions
+
+
 
 def draw_grid(positions):
     for position in positions:
@@ -115,7 +125,9 @@ def main():
                     count = 0
                 
                 if event.key == pygame.K_g:
-                    positions = gen(random.randrange(4, 10) * GRID_WIDTH)
+                    max_cells = GRID_WIDTH * GRID_HEIGHT
+                    positions = gen(min(random.randrange(4, 10) * GRID_WIDTH, max_cells))
+
     
         screen.fill(GREY)
         draw_grid(positions)
