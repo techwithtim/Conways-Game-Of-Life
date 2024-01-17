@@ -13,7 +13,8 @@ GRID_WIDTH = WIDTH // TILE_SIZE
 GRID_HEIGHT = HEIGHT // TILE_SIZE
 FPS = 60
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+
 
 clock = pygame.time.Clock()
 
@@ -124,4 +125,7 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
+    pygame.display.set_caption("Conway's Game of Life")
+    screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
     main()
+    pygame.quit()
