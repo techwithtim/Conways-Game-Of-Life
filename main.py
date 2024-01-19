@@ -1,6 +1,8 @@
 # Conway's Game of Life Source Code
 # Press 'g' to populate grid randomly
 # Press 'c' to clear grid
+# Press spcebar to resume/pause 
+
 
 import pygame
 import random
